@@ -1141,3 +1141,7 @@ pre .copy-to-clipboard:hover {
 option {
     color: initial;
 }
+.floatleft {
+	text-align: left;
+    width: 100;
+}
