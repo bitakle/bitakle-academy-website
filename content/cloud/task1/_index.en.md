@@ -8,7 +8,7 @@ disableToc: true
 
 ### Objective:
 
-This task is intended to familiarize you with Azure portal and how the resources are provisioned. To complete the task, you will need to provision several Azure resources and upload HTML file to it.
+This task is intended to familiarize you with Azure portal and how the resources are provisioned. To complete the task, you will need to provision several Azure resources and upload HTML file to it. The final result is a static webpage served from Azure storage blob as a single HTML file.
 
 ### Instructions:
 
