@@ -3,69 +3,82 @@ title: Task 3
 weight: 35
 ---
 
-# Web App on NGINX VM
+# Continuous Deployment with Github and Azure Static Web App
 
 ### Objective:
 
-In this task, you will provision Azure Container Registry to host container images used to deploy web app. The container images will be built using Azure Container Registry tasks via Azure CLI or using [Docker](https://docs.docker.com/engine/).
+In this task, you will learn about code repository [Github](https://github.com) and will set up your first repo to store your web app code. Then you will provision Azure Static Web App and configure continuous deployment from your Github repository.
+
+### Prerequisites:
+
+You will need to create [Github](https://github.com) account if you don't have one already.
 
 ### Instructions:
 
-  - #### Part 1 - Azure Container Registry
+  - #### Part 1 - Github repository
 
-    - Step 1: Provision Azure Container Registry ([Ref](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal))
-    - Step 2: Install Azure CLI on your machine ([Ref](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli))
-    - Step 3: Log in to ACR: `az login; az acr login --name <registry_name>`
+    - Step 1: Create Github repository ([Ref](https://docs.github.com/en/get-started/quickstart/create-a-repo)) under Bitakle organization.
+    - Step 2: Create the following files under `src` folder.
 
-- #### Part 2 - Build Web App Container
-
-    - Step 1: Create simple HTML file **index.html** to serve out of NGINX container
+      *index.html*
       ```html
-      <html>
-        <head>
-            <title>Href Attribute Example</title>
-        </head>
-        <body>
-            <h1>Href Attribute Example</h1>
-            <p>
-            <a href="https://www.bitakle.org">The Bitakle Page</a> shows you where you can start your InfoTech journey.
-            </p>
-        </body>
+      <!DOCTYPE html>
+      <html lang="en">
+
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Vanilla JavaScript App</title>
+      </head>
+
+      <body>
+        <main>
+          <h1>Vanilla JavaScript App</h1>
+        </main>
+      </body>
+
       </html>
       ```
-    - Step 2: Create simple NGINX Dockerfile to build container image from
-      ```Dockerfile
-      FROM nginx:latest
-      COPY ./index.html /usr/share/nginx/html/index.html
-      ```
-    - Step 3: Install Docker to build and test the image locally [Ref](https://docs.docker.com/engine/install/ubuntu/)
+      *styles.css*
+      ```css
+      * {
+          font-family: Arial, Helvetica, sans-serif;
+        }
 
-    - Step 4: Build container image locally
-      ```bash
-      # Change to the same directory with Dockerfile
-      docker build -t webserver .
-      ```
-    - Step 5: Run the image locally
-      ```bash
-      docker run -it --rm -d -p 8080:80 --name web webserver
-      ```
-    - Step 6: Navigate to the http://localhost:8080 to verify the webpage is being served correctly
-    - Step 7: Push the image to Azure Container Registry:
-      ```bash
-      docker tag webserver <registry_name>.azurecr.io/web/webserver
-      docker push <registry_name>.azurecr.io/web/webserver
-      ```
-      {{% notice note %}} Alternatively, you can build and push images directly using az-cli acr task
-      ```bash
-      az acr build --registry <registry_name> --image /web/webserver:v1 .
-      ```
-      {{% /notice %}}
+        html, body {
+          margin: 0;
+          border: 0;
+          padding: 0;
+          background-color: #fff;
+        }
 
-- #### Part 3 - Run container in Azure
+        main {
+          margin: auto;
+          width: 50%;
+          padding: 20px;
+        }
 
-    - Step 1: Create and configure Azure App service or Web App with the appropriate settings
-    - Step 2: Point the service to utilize the container image from the [Step-2](#part-2---build-web-app-container)
-    - Step 3: Visit the webpage of the Web App service and verify the expected result
+        main > h1 {
+          text-align: center;
+          font-size: 3.5em;
+        }
+      ```
+    - Step 3: Upload `src` folder to the repository.
+
+- #### Part 2 - Provision Azure Static Web App
+
+    - Step 1: Create static web app and connect it to Github repository from the previous step ([Ref](https://docs.microsoft.com/en-us/azure/static-web-apps/get-started-portal?tabs=vanilla-javascript#create-a-static-web-app))
+
+    - Step 2: Once completed, navigate to Github repository and check **Actions** tab. Verify that the action completed successfully.
+
+    - Step 3: Navigate to the web app URL and verify its content.
+
+- #### Part 3 - Verify Continuous Deployment
+
+    - Step 1: Make changes to **index.html** and **styles.css** files and update them in Github repository.
+    - Step 2: Check to make sure action under **Actions** tab is completed successfully.
+    - Step 3: Refresh the webpage and verify the changes are displayed.
 
 {{% notice info %}}
 This guide is an outline of the steps and the goals for each part. It is not a comprehensive guide. You may experience errors or find a need for additional steps in the process. Use your troubleshooting skills, official documentation, and any other resources to complete this task.
