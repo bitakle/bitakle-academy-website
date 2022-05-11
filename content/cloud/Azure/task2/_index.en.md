@@ -28,7 +28,7 @@ In this task, you will provision Azure Container Registry to host container imag
         <body>
             <h1>Href Attribute Example</h1>
             <p>
-            <a href="https://www.bitakle.org">The Bitakle Page</a> shows you where you can start your InfoTech journey.
+            <a href="https://bitakle.org">The Bitakle Page</a> shows you where you can start your InfoTech journey.
             </p>
         </body>
       </html>

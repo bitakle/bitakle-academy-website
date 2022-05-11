@@ -8,6 +8,6 @@ title: "Bitakle Academy"
 
 ### Overview
 
-This website is the learning platform for [Bitakle.org](https://www.bitakle.org). It contains various tasks and steps to complete them for each category. The categories can be found on the left sidemenu.
+This website is the learning platform for [Bitakle.org](https://bitakle.org). It contains various tasks and steps to complete them for each category. The categories can be found on the left sidemenu.
 
 {{< figure src="/images/arrow-return-left.png" class="floatleft">}}
